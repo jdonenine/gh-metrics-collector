@@ -1,0 +1,68 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.2'
+	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'java'
+	id 'com.bmuschko.docker-spring-boot-application' version '7.3.0'
+}
+
+group = 'jeffdinoto'
+version = '0.0.1-snapshot'
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.kohsuke:github-api:1.307'
+	implementation 'com.google.guava:guava:31.1-jre'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+docker {
+	springBootApplication {
+		baseImage = 'openjdk:17-jdk-slim-buster'
+	}
+}
+
+task printGroup {
+	doLast {
+		println project.group
+	}
+}
+
+task printName {
+	doLast {
+		println project.name
+	}
+}
+
+task printVersion {
+	doLast {
+		println project.version
+	}
+}
+
+task printCurrentImage {
+	doLast {
+		println project.group + '/' + project.name + ':' + project.version
+	}
+}

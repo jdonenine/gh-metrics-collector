@@ -1,0 +1,43 @@
+tenant:
+  id: ${APP_TENANT_ID}
+  name: ${APP_TENANT_NAME:}
+application:
+  gh-access-token: ${APP_GH_ACCESS_TOKEN:}
+  gh-org: ${APP_GH_ORG:}
+  gh-repo: ${APP_GH_REPO:}
+  exclude-comments-from-gh-users: ${APP_EXCLUDE_COMMENTS_FROM_GH_USERS:}
+  exclude-issues-from-gh-users: ${APP_EXCLUDE_ISSUES_FROM_GH_USERS:}
+  aviator-mergequeue-author: ${APP_AVIATOR_MERGEQUEUE_AUTHOR:}
+  sync-on-startup: ${APP_SYNC_ON_STARTUP:false}
+  override-sync-history-window-start-date: ${APP_OVERRIDE_SYNC_HISTORY_WINDOW_START_DATE:}
+  exit-after-sync-on-startup: ${APP_EXIT_AFTER_SYNC_ON_STARTUP:false}
+  default-sync-history-window-days: ${APP_DEFAULT_SYNC_HISTORY_WINDOW_DAYS:7}
+  indexes:
+    pull:
+      replicas: ${APP_INDEXES_PULL_REPLICAS:2}
+    sync:
+      replicas: ${APP_INDEXES_SYNC_REPLICAS:2}
+  elasticsearch:
+    ssl: ${ES_SSL:true}
+    host: ${ES_HOST:0.0.0.0}
+    port: ${ES_PORT:9200}
+    connection-timeout-s: ${ES_CONNECTION_TIMEOUT_S:10}
+    socket-timeout-s: ${ES_SOCKET_TIMEOUT_S:60}
+    password: ${ES_PASSWORD:}
+    username: ${ES_USERNAME:}
+    cert-alias: ${ES_CERT_ALIAS:ca}
+    cert-path: ${ES_CERT_PATH:}
+
+spring:
+  application:
+    name: github-metrics-collector
+
+logging:
+  level:
+    com:
+      ghutils:
+        mc: ${APP_LOG_LEVEL:INFO}
+
+springdoc:
+  swagger-ui:
+    path: /api-docs
