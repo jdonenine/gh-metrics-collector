@@ -1,14 +1,15 @@
 package com.onenine.ghmc.configuration;
 
+import com.google.common.collect.Sets;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.elasticsearch.common.util.set.Sets;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.HashSet;
+import java.util.Map;
 
 @Configuration
 @EnableConfigurationProperties
@@ -28,6 +29,8 @@ public class ApplicationConfiguration {
     private Boolean exitAfterSyncOnStartup;
     private Integer defaultSyncHistoryWindowDays = 7;
     private String overrideSyncHistoryWindowStartDate;
+    private Boolean deleteIndicesOnStartup;
+    private Map<String, IndexConfiguration> indices;
 
     public Boolean isValid() {
         if (ghAccessToken == null || ghAccessToken.isEmpty()) {

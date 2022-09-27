@@ -12,21 +12,22 @@ application:
   override-sync-history-window-start-date: ${APP_OVERRIDE_SYNC_HISTORY_WINDOW_START_DATE:}
   exit-after-sync-on-startup: ${APP_EXIT_AFTER_SYNC_ON_STARTUP:false}
   default-sync-history-window-days: ${APP_DEFAULT_SYNC_HISTORY_WINDOW_DAYS:7}
-  indexes:
+  delete-indices-on-startup: ${APP_DELETE_INDICES_ON_STARTUP:false}
+  indices:
     pull:
-      replicas: ${APP_INDEXES_PULL_REPLICAS:2}
+      replicas: ${APP_INDEXES_PULL_REPLICAS:1}
+      shards: ${APP_INDEXES_PULL_SHARDS:1}
     sync:
       replicas: ${APP_INDEXES_SYNC_REPLICAS:2}
+      shards: ${APP_INDEXES_SYNC_SHARDS:2}
   elasticsearch:
     ssl: ${ES_SSL:true}
     host: ${ES_HOST:0.0.0.0}
     port: ${ES_PORT:9200}
-    connection-timeout-s: ${ES_CONNECTION_TIMEOUT_S:10}
-    socket-timeout-s: ${ES_SOCKET_TIMEOUT_S:60}
     password: ${ES_PASSWORD:}
     username: ${ES_USERNAME:}
-    cert-alias: ${ES_CERT_ALIAS:ca}
-    cert-path: ${ES_CERT_PATH:}
+    disable-hostname-verification: ${ES_DISABLE_HOSTNAME_VERIFICATION:false}
+    trust-all-certificates: ${ES_TRUST_ALL_CERTIFICATES:false}
 
 spring:
   application:

@@ -1,12 +1,12 @@
 package com.onenine.ghmc.models;
 
-import com.onenine.ghmc.services.PullUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+import com.onenine.ghmc.services.PullUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.elasticsearch.common.util.set.Sets;
 import org.kohsuke.github.GHIssueComment;
 import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GHPullRequestCommitDetail;
@@ -15,15 +15,11 @@ import org.kohsuke.github.GHPullRequestReviewComment;
 import org.kohsuke.github.GHPullRequestReviewState;
 import org.kohsuke.github.PagedIterator;
 import org.slf4j.Logger;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.IOException;
 import java.time.Instant;
-import java.time.ZonedDateTime;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -37,13 +33,13 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "pull-#{@environment.getProperty('tenant.id')}")
+//@Document(indexName = "pull-#{@environment.getProperty('tenant.id')}")
 public class Pull {
     private static final Logger log = getLogger(Pull.class);
 
     private static Short test;
 
-    @Id
+//    @Id
     private String id;
 
     private String org;
@@ -52,14 +48,14 @@ public class Pull {
     private String title;
     private String author;
     private List<String> assignees;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime createdAt;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime updatedAt;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime closedAt;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime mergedAt;
+//    @Field(type = FieldType.Date)
+    private Date createdAt;
+//    @Field(type = FieldType.Date)
+    private Date updatedAt;
+//    @Field(type = FieldType.Date)
+    private Date closedAt;
+//    @Field(type = FieldType.Date)
+    private Date mergedAt;
     private Integer numCommits;
     private Integer numComments;
     private Integer numNonReviewComments;
@@ -97,14 +93,14 @@ public class Pull {
     private Integer numRequestedReviewers;
 
 
-    @Field(type = FieldType.Date)
-    private ZonedDateTime firstFeedbackAt;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime firstCommentAt;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime firstReviewAt;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime firstApprovedReviewAt;
+//    @Field(type = FieldType.Date)
+    private Date firstFeedbackAt;
+//    @Field(type = FieldType.Date)
+    private Date firstCommentAt;
+//    @Field(type = FieldType.Date)
+    private Date firstReviewAt;
+//    @Field(type = FieldType.Date)
+    private Date firstApprovedReviewAt;
     private String body;
 
     private Float hoursToFirstApprovedReview;
@@ -119,8 +115,8 @@ public class Pull {
     private Float daysToFirstFeedback;
     private Float hoursToClosure;
     private Float daysToClosure;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime lastObservedAt;
+//    @Field(type = FieldType.Date)
+    private Date lastObservedAt;
     private Integer numCommitsAfterFirstFeedback;
     private Integer numCommitsAfterFirstReview;
     private Integer numCommitsAfterFirstApprovedReview;
@@ -130,7 +126,7 @@ public class Pull {
     private Set<Integer> linkedIssues = Sets.newHashSet();
     private Integer numLinkedIssues;
 
-    public static Pull fromGhPullRequest(String org, String repo, GHPullRequest pr, HashSet<String> excludeCommentsFromGithubUsers, ZonedDateTime observedAt) {
+    public static Pull fromGhPullRequest(String org, String repo, GHPullRequest pr, HashSet<String> excludeCommentsFromGithubUsers, Date observedAt) {
         log.debug("Hydrating Pull from GHPullRequest {}/{}/{}", org, repo, pr.getNumber());
         Instant start = Instant.now();
 
@@ -164,10 +160,10 @@ public class Pull {
             log.warn("Unable to retrieve updatedAt for pull #{}", pr.getNumber(), e);
         }
 
-        ZonedDateTime closedAt = pr.getClosedAt() != null ? getUtcDateTimeFromDate(pr.getClosedAt()) : null;
-        ZonedDateTime firstCommentAt = null;
-        ZonedDateTime firstReviewAt = null;
-        ZonedDateTime firstApprovingReviewAt = null;
+        Date closedAt = pr.getClosedAt() != null ? getUtcDateTimeFromDate(pr.getClosedAt()) : null;
+        Date firstCommentAt = null;
+        Date firstReviewAt = null;
+        Date firstApprovingReviewAt = null;
 
         Map<String, List<PullComment>> comments = null;
         try {
@@ -235,19 +231,19 @@ public class Pull {
 
         if (closedAt != null) {
             p.setClosedAt(closedAt);
-            Float hoursToClosure = (p.getClosedAt().toEpochSecond() - p.getCreatedAt().toEpochSecond()) / 60.0F / 60.0F;
+            Float hoursToClosure = (p.getClosedAt().toInstant().toEpochMilli() / 1000 - p.getCreatedAt().toInstant().toEpochMilli() / 1000) / 60.0F / 60.0F;
             p.setHoursToClosure(hoursToClosure);
             p.setDaysToClosure(p.getHoursToClosure() / 24.0F);
         }
 
-        ZonedDateTime firstFeedbackAt = firstCommentAt;
+        Date firstFeedbackAt = firstCommentAt;
         if (firstFeedbackAt == null) {
             if (firstReviewAt != null) {
                 firstFeedbackAt = firstReviewAt;
             }
         } else {
             if (firstReviewAt != null) {
-                if (firstReviewAt.isBefore(firstFeedbackAt)) {
+                if (firstReviewAt.before(firstFeedbackAt)) {
                     firstFeedbackAt = firstReviewAt;
                 }
             }

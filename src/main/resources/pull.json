@@ -1,0 +1,657 @@
+{
+  "properties" : {
+    "_class" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "approvingReviewers" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "assignees" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "author" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "baseRef" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "baseSha" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "body" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "changesRequestedReviewers" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "closedAt" : {
+      "type" : "date"
+    },
+    "commenters" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "comments" : {
+      "properties" : {
+        "createdAt" : {
+          "type" : "date"
+        },
+        "isReviewComment" : {
+          "type" : "boolean"
+        },
+        "number" : {
+          "type" : "long"
+        },
+        "org" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "repo" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "user" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        }
+      }
+    },
+    "commits" : {
+      "properties" : {
+        "author" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "authoredAt" : {
+          "type" : "date"
+        },
+        "committedAt" : {
+          "type" : "date"
+        },
+        "committer" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "number" : {
+          "type" : "long"
+        },
+        "org" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "repo" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        }
+      }
+    },
+    "createdAt" : {
+      "type" : "date"
+    },
+    "daysFromFirstFeedbackToClosure" : {
+      "type" : "float"
+    },
+    "daysToClosure" : {
+      "type" : "float"
+    },
+    "daysToFirstApprovedReview" : {
+      "type" : "float"
+    },
+    "daysToFirstFeedback" : {
+      "type" : "float"
+    },
+    "daysToFirstReview" : {
+      "type" : "float"
+    },
+    "draft" : {
+      "type" : "boolean"
+    },
+    "firstApprovedReviewAt" : {
+      "type" : "date"
+    },
+    "firstCommentAt" : {
+      "type" : "date"
+    },
+    "firstFeedbackAt" : {
+      "type" : "date"
+    },
+    "firstReviewAt" : {
+      "type" : "date"
+    },
+    "hoursFromFirstFeedbackToClosure" : {
+      "type" : "float"
+    },
+    "hoursToClosure" : {
+      "type" : "float"
+    },
+    "hoursToFirstApprovedReview" : {
+      "type" : "float"
+    },
+    "hoursToFirstFeedback" : {
+      "type" : "float"
+    },
+    "hoursToFirstReview" : {
+      "type" : "float"
+    },
+    "htmlUrl" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "id" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "labels" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "lastObservedAt" : {
+      "type" : "date"
+    },
+    "mergeSha" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "mergedAt" : {
+      "type" : "date"
+    },
+    "numAdditions" : {
+      "type" : "long"
+    },
+    "numApprovingReviewers" : {
+      "type" : "long"
+    },
+    "numApprovingReviews" : {
+      "type" : "long"
+    },
+    "numChangesRequestedReviewers" : {
+      "type" : "long"
+    },
+    "numChangesRequestedReviews" : {
+      "type" : "long"
+    },
+    "numCommenters" : {
+      "type" : "long"
+    },
+    "numComments" : {
+      "type" : "long"
+    },
+    "numCommentsByUser" : {
+      "properties" : {
+        "0hlov3" : {
+          "type" : "long"
+        },
+        "AbhijithGanesh" : {
+          "type" : "long"
+        },
+        "Dutchy-" : {
+          "type" : "long"
+        },
+        "KiaFarhang" : {
+          "type" : "long"
+        },
+        "Miles-Garnsey" : {
+          "type" : "long"
+        },
+        "Rooks103" : {
+          "type" : "long"
+        },
+        "aahutsal" : {
+          "type" : "long"
+        },
+        "adejanovski" : {
+          "type" : "long"
+        },
+        "adutra" : {
+          "type" : "long"
+        },
+        "ahmedjami" : {
+          "type" : "long"
+        },
+        "ajmaidak" : {
+          "type" : "long"
+        },
+        "akshaymankar" : {
+          "type" : "long"
+        },
+        "anclrii" : {
+          "type" : "long"
+        },
+        "andyfoston" : {
+          "type" : "long"
+        },
+        "andyfoston-sky" : {
+          "type" : "long"
+        },
+        "bradfordcp" : {
+          "type" : "long"
+        },
+        "burmanm" : {
+          "type" : "long"
+        },
+        "caniko" : {
+          "type" : "long"
+        },
+        "codecov-commenter" : {
+          "type" : "long"
+        },
+        "codecov[bot]" : {
+          "type" : "long"
+        },
+        "dependabot-preview[bot]" : {
+          "type" : "long"
+        },
+        "dependabot[bot]" : {
+          "type" : "long"
+        },
+        "dyvol777" : {
+          "type" : "long"
+        },
+        "eatwithforks" : {
+          "type" : "long"
+        },
+        "emerkle826" : {
+          "type" : "long"
+        },
+        "flokli" : {
+          "type" : "long"
+        },
+        "gosuvn" : {
+          "type" : "long"
+        },
+        "ivanmp91" : {
+          "type" : "long"
+        },
+        "jakerobb" : {
+          "type" : "long"
+        },
+        "jdonenine" : {
+          "type" : "long"
+        },
+        "jeffbanks" : {
+          "type" : "long"
+        },
+        "jmooo" : {
+          "type" : "long"
+        },
+        "johnsmartco" : {
+          "type" : "long"
+        },
+        "jsanda" : {
+          "type" : "long"
+        },
+        "kiddom-kq" : {
+          "type" : "long"
+        },
+        "mapster" : {
+          "type" : "long"
+        },
+        "maxbrunet" : {
+          "type" : "long"
+        },
+        "michaelsembwever" : {
+          "type" : "long"
+        },
+        "mieslep" : {
+          "type" : "long"
+        },
+        "msmygit" : {
+          "type" : "long"
+        },
+        "olim7t" : {
+          "type" : "long"
+        },
+        "omygod613" : {
+          "type" : "long"
+        },
+        "ossarga" : {
+          "type" : "long"
+        },
+        "paulslaven" : {
+          "type" : "long"
+        },
+        "perplexa" : {
+          "type" : "long"
+        },
+        "rzvoncek" : {
+          "type" : "long"
+        },
+        "rzvoncek-ds" : {
+          "type" : "long"
+        },
+        "simonfontana" : {
+          "type" : "long"
+        },
+        "sonarcloud[bot]" : {
+          "type" : "long"
+        },
+        "van-vliet" : {
+          "type" : "long"
+        },
+        "xgerman" : {
+          "type" : "long"
+        }
+      }
+    },
+    "numCommits" : {
+      "type" : "long"
+    },
+    "numCommitsAfterFirstApprovedReview" : {
+      "type" : "long"
+    },
+    "numCommitsAfterFirstFeedback" : {
+      "type" : "long"
+    },
+    "numCommitsAfterFirstReview" : {
+      "type" : "long"
+    },
+    "numDeletions" : {
+      "type" : "long"
+    },
+    "numFilesChanged" : {
+      "type" : "long"
+    },
+    "numNonReviewComments" : {
+      "type" : "long"
+    },
+    "numRequestedReviewers" : {
+      "type" : "long"
+    },
+    "numReviewComments" : {
+      "type" : "long"
+    },
+    "numReviewers" : {
+      "type" : "long"
+    },
+    "numReviews" : {
+      "type" : "long"
+    },
+    "numReviewsByUser" : {
+      "properties" : {
+        "KiaFarhang" : {
+          "type" : "long"
+        },
+        "Miles-Garnsey" : {
+          "type" : "long"
+        },
+        "adejanovski" : {
+          "type" : "long"
+        },
+        "adutra" : {
+          "type" : "long"
+        },
+        "andyfoston-sky" : {
+          "type" : "long"
+        },
+        "bradfordcp" : {
+          "type" : "long"
+        },
+        "burmanm" : {
+          "type" : "long"
+        },
+        "emerkle826" : {
+          "type" : "long"
+        },
+        "flokli" : {
+          "type" : "long"
+        },
+        "jdonenine" : {
+          "type" : "long"
+        },
+        "jeffbanks" : {
+          "type" : "long"
+        },
+        "johnsmartco" : {
+          "type" : "long"
+        },
+        "jsanda" : {
+          "type" : "long"
+        },
+        "michaelsembwever" : {
+          "type" : "long"
+        },
+        "mieslep" : {
+          "type" : "long"
+        },
+        "ossarga" : {
+          "type" : "long"
+        },
+        "rzvoncek-ds" : {
+          "type" : "long"
+        },
+        "sandeepmallik" : {
+          "type" : "long"
+        }
+      }
+    },
+    "number" : {
+      "type" : "long"
+    },
+    "org" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "repo" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "requestedReviewers" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "requestedTeams" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "reviewers" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "reviews" : {
+      "properties" : {
+        "approved" : {
+          "type" : "boolean"
+        },
+        "changesRequested" : {
+          "type" : "boolean"
+        },
+        "number" : {
+          "type" : "long"
+        },
+        "org" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "repo" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        },
+        "submittedAt" : {
+          "type" : "date"
+        },
+        "user" : {
+          "type" : "text",
+          "fields" : {
+            "keyword" : {
+              "type" : "keyword",
+              "ignore_above" : 256
+            }
+          }
+        }
+      }
+    },
+    "state" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "title" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    },
+    "updatedAt" : {
+      "type" : "date"
+    },
+    "url" : {
+      "type" : "text",
+      "fields" : {
+        "keyword" : {
+          "type" : "keyword",
+          "ignore_above" : 256
+        }
+      }
+    }
+  }
+}

@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.kohsuke.github.GHPullRequestCommitDetail;
 import org.slf4j.Logger;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.ZonedDateTime;
 
@@ -24,9 +22,9 @@ public class PullCommit implements Comparable<PullCommit> {
     private Integer number;
     private String author;
     private String committer;
-    @Field(type = FieldType.Date)
+//    @Field(type = FieldType.Date)
     private ZonedDateTime authoredAt;
-    @Field(type = FieldType.Date)
+//    @Field(type = FieldType.Date)
     private ZonedDateTime committedAt;
 
     public static PullCommit fromGHPullRequestCommitDetail(String org, String repo, Integer number, GHPullRequestCommitDetail ghCommitDetail) {

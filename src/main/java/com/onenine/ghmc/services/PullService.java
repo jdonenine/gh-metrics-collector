@@ -1,5 +1,8 @@
 package com.onenine.ghmc.services;
 
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import com.google.common.collect.Sets;
+import com.onenine.ghmc.exceptions.RepositoryException;
 import com.onenine.ghmc.exceptions.ServiceException;
 import com.onenine.ghmc.models.Pull;
 import com.onenine.ghmc.models.PullDateType;
@@ -7,7 +10,6 @@ import com.onenine.ghmc.models.PullState;
 import com.onenine.ghmc.repositories.PullRepository;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.common.util.set.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +42,11 @@ public class PullService {
             throw new IllegalArgumentException("number is required");
         }
         try {
-            return pullRepository.findByOrgAndRepoAndNumber(org.trim(), repo.trim(), number);
+            Hit<Pull> pullHit = pullRepository.findByOrgAndRepoAndNumber(org.trim(), repo.trim(), number).orElse(null);
+            if (pullHit == null) {
+                return Optional.empty();
+            }
+            return Optional.of(pullHit.source());
         } catch (Exception e) {
             throw new ServiceException("Unable to retrieve pull " + org.trim() + "/" + repo.trim() + "/" + number, e);
         }
@@ -69,7 +75,7 @@ public class PullService {
         Iterable<Pull> saved = null;
         try {
             saved = pullRepository.saveAll(pulls);
-        } catch (Exception e) {
+        } catch (Exception | RepositoryException e) {
             log.error("Unable to save pulls", e);
             throw new ServiceException("Unable to save pulls", e);
         }
@@ -120,7 +126,7 @@ public class PullService {
 
         try {
             pullRepository.saveAll(updatedPulls);
-        } catch (Exception e) {
+        } catch (Exception | RepositoryException e) {
             throw new ServiceException("Unable to save updated pulls for " + org + "/" + repo, e);
         }
 
@@ -143,7 +149,7 @@ public class PullService {
 
         try {
             pullRepository.saveAll(updatedPulls);
-        } catch (Exception e) {
+        } catch (Exception | RepositoryException e) {
             throw new ServiceException("Unable to save updated pulls for " + org + "/" + repo, e);
         }
 

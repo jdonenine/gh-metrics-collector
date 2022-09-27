@@ -1,14 +1,17 @@
 package com.onenine.ghmc.repositories;
 
+import co.elastic.clients.elasticsearch.core.search.Hit;
+import com.onenine.ghmc.exceptions.RepositoryException;
 import com.onenine.ghmc.models.Pull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
-public interface PullRepository extends ElasticsearchRepository<Pull, String> {
-    Optional<Pull> findByOrgAndRepoAndNumber(String org, String repo, Integer number);
+public interface PullRepository {
+    Optional<Hit<Pull>> findByOrgAndRepoAndNumber(String org, String repo, Integer number) throws IOException;
 
     Page<Pull> findByOrgAndRepoOrderByCreatedAt(String org, String repo, Pageable pageable);
 
@@ -21,4 +24,10 @@ public interface PullRepository extends ElasticsearchRepository<Pull, String> {
     Page<Pull> findByOrgAndRepoAndAuthorAndStateAndClosedAtGreaterThanEqualOrderByCreatedAt(String org, String repo, String author, String state, String dateAfter, Pageable pageable);
 
     Page<Pull> findByOrgAndRepoAndAuthorAndStateAndMergedAtGreaterThanEqualOrderByCreatedAt(String org, String repo, String author, String state, String dateAfter, Pageable pageable);
+
+    Pull save(Pull pull);
+
+    Iterable<Pull> saveAll(List<Pull> pulls) throws IOException, RepositoryException;
+
+    Page<Pull> findAll(Pageable nextPageable);
 }

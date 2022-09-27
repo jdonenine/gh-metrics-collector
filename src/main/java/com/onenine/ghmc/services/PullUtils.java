@@ -1,5 +1,6 @@
 package com.onenine.ghmc.services;
 
+import com.google.common.collect.Sets;
 import com.onenine.ghmc.exceptions.ServiceException;
 import com.onenine.ghmc.models.Pull;
 import com.onenine.ghmc.models.PullDateType;
@@ -8,7 +9,6 @@ import com.onenine.ghmc.models.Sync;
 import com.onenine.ghmc.utils.TimeUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.elasticsearch.common.util.set.Sets;
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHPullRequest;
 import org.slf4j.Logger;

@@ -28,7 +28,6 @@ public class AviatorUtils {
     private static final Pattern linkedPRListStartLinePattern = Pattern.compile(linkedPRListStartLineRegex, Pattern.CASE_INSENSITIVE);
     private static final String linkedPRListLineRegex = "^(\\d+)$";
     private static final Pattern linkedPRListLineRegexPattern = Pattern.compile(linkedPRListLineRegex, Pattern.CASE_INSENSITIVE);
-
     private static final Logger log = getLogger(AviatorUtils.class);
 
     public static boolean updateLinkedPullRequests(Pull pull, String aviatorMergeQueueAuthor) {

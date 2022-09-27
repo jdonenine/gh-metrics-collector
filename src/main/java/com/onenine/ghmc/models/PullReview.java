@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import org.kohsuke.github.GHPullRequestReview;
 import org.kohsuke.github.GHPullRequestReviewState;
 import org.slf4j.Logger;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.ZonedDateTime;
 
@@ -24,7 +22,7 @@ public class PullReview implements Comparable<PullReview> {
     private String repo;
     private Integer number;
     private String user;
-    @Field(type = FieldType.Date)
+//    @Field(type = FieldType.Date)
     private ZonedDateTime submittedAt;
     private boolean approved;
     private boolean changesRequested;

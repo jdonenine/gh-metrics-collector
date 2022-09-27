@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.ZonedDateTime;
+import java.util.Date;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -21,14 +19,14 @@ public class PullComment implements Comparable<PullComment> {
     private String repo;
     private Integer number;
     private String user;
-    @Field(type = FieldType.Date)
-    private ZonedDateTime createdAt;
+//    @Field(type = FieldType.Date)
+    private Date createdAt;
     private boolean isReviewComment;
 
     @Override
     public int compareTo(PullComment that) {
-        ZonedDateTime thisCreatedAt = getCreatedAt();
-        ZonedDateTime thatCreatedAt = that != null ? that.getCreatedAt() : null;
+        Date thisCreatedAt = getCreatedAt();
+        Date thatCreatedAt = that != null ? that.getCreatedAt() : null;
         if (thisCreatedAt == null && thatCreatedAt == null) {
             return 0;
         }

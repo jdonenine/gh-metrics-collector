@@ -13,17 +13,31 @@ public class TimeUtils {
         return ZonedDateTime.now(UTC_ZONE_ID);
     }
 
-    public static ZonedDateTime getUtcDateTimeFromDate(Date date) {
+//    public static ZonedDateTime getUtcDateTimeFromDate(Date date) {
+//        if (date == null) {
+//            throw new IllegalArgumentException("date is required");
+//        }
+//        return ZonedDateTime.ofInstant(date.toInstant(), UTC_ZONE_ID);
+//    }
+
+        public static Date getUtcDateTimeFromDate(Date date) {
         if (date == null) {
             throw new IllegalArgumentException("date is required");
         }
-        return ZonedDateTime.ofInstant(date.toInstant(), UTC_ZONE_ID);
+        return date;
     }
 
-    public static ZonedDateTime getUtcDateTimeFromDate(Instant date) {
+//    public static ZonedDateTime getUtcDateTimeFromDate(Instant date) {
+//        if (date == null) {
+//            throw new IllegalArgumentException("date is required");
+//        }
+//        return ZonedDateTime.ofInstant(date, UTC_ZONE_ID);
+//    }
+
+    public static Date getUtcDateTimeFromDate(Instant date) {
         if (date == null) {
             throw new IllegalArgumentException("date is required");
         }
-        return ZonedDateTime.ofInstant(date, UTC_ZONE_ID);
+        return Date.from(date);
     }
 }
