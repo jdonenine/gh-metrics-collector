@@ -22,12 +22,16 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class AviatorUtils {
     private static final String linkedPRMainLineRegex = "^PR #(\\d+) will be merged after CI of this PR completes\\.$";
     private static final String linkedPRMainLineRegex2 = "^This PR contains changes from PR #(\\d+). This PR will be fast-forwarded into \\S+ \\(and the original PR will be closed\\) when CI passes\\.$";
+    private static final String linkedPRMainLineRegex3 = "^This PR contains changes from PR\\(s\\)\\:#(\\d+)$";
     private static final Pattern linkedPRMainLinePattern = Pattern.compile(linkedPRMainLineRegex, Pattern.CASE_INSENSITIVE);
     private static final Pattern linkedPRMainLinePattern2 = Pattern.compile(linkedPRMainLineRegex2, Pattern.CASE_INSENSITIVE);
+    private static final Pattern linkedPRMainLinePattern3 = Pattern.compile(linkedPRMainLineRegex3, Pattern.CASE_INSENSITIVE);
     private static final String linkedPRListStartLineRegex = "This PR also includes changes from the following PRs:";
     private static final Pattern linkedPRListStartLinePattern = Pattern.compile(linkedPRListStartLineRegex, Pattern.CASE_INSENSITIVE);
     private static final String linkedPRListLineRegex = "^(\\d+)$";
+    private static final String linkedPRListLineRegex2 = "^.*\\((\\d+)\\)$";
     private static final Pattern linkedPRListLineRegexPattern = Pattern.compile(linkedPRListLineRegex, Pattern.CASE_INSENSITIVE);
+    private static final Pattern linkedPRListLineRegexPattern2 = Pattern.compile(linkedPRListLineRegex2, Pattern.CASE_INSENSITIVE);
 
     private static final Logger log = getLogger(AviatorUtils.class);
 
@@ -66,11 +70,14 @@ public class AviatorUtils {
 
             Matcher mainLineMatcher = linkedPRMainLinePattern.matcher(line.trim());
             Matcher mainLineMatcher2 = linkedPRMainLinePattern2.matcher(line.trim());
+            Matcher mainLineMatcher3 = linkedPRMainLinePattern3.matcher(line.trim());
             Matcher matchedMainLineMatcher = null;
             if (mainLineMatcher != null && mainLineMatcher.find()) {
                 matchedMainLineMatcher = mainLineMatcher;
             } else if (mainLineMatcher2 != null && mainLineMatcher2.find()) {
                 matchedMainLineMatcher = mainLineMatcher2;
+            } else if (mainLineMatcher3 != null && mainLineMatcher3.find()) {
+                matchedMainLineMatcher = mainLineMatcher3;
             }
             if (matchedMainLineMatcher != null) {
                 String value = matchedMainLineMatcher.group(1);
@@ -94,19 +101,29 @@ public class AviatorUtils {
                 continue;
             }
 
-            Matcher listLineMatcher = linkedPRListLineRegexPattern.matcher(line.trim());
-            if (listingPrs && listLineMatcher != null && listLineMatcher.find()) {
-                String value = listLineMatcher.group(1);
-                Integer number = null;
-                try {
-                    number = Integer.parseInt(value);
-                } catch (Exception e) {
-                    number = null;
+            if (listingPrs) {
+                Matcher matchedListLineMatcher = null;
+                Matcher listLineMatcher = linkedPRListLineRegexPattern.matcher(line.trim());
+                Matcher listLineMatcher2 = linkedPRListLineRegexPattern2.matcher(line.trim());
+                if (listLineMatcher != null && listLineMatcher.find()) {
+                    matchedListLineMatcher = listLineMatcher;
+                } else if (listLineMatcher2 != null && listLineMatcher2.find()) {
+                    matchedListLineMatcher = listLineMatcher2;
                 }
-                if (number != null) {
-                    linkedPullNumbers.add(number);
+
+                if (matchedListLineMatcher != null) {
+                    String value = matchedListLineMatcher.group(1);
+                    Integer number = null;
+                    try {
+                        number = Integer.parseInt(value);
+                    } catch (Exception e) {
+                        number = null;
+                    }
+                    if (number != null) {
+                        linkedPullNumbers.add(number);
+                    }
+                    continue;
                 }
-                continue;
             }
         }
 
