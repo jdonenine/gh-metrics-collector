@@ -2,11 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.7.2'
 	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
 	id 'java'
-	id 'com.bmuschko.docker-spring-boot-application' version '7.3.0'
 }
 
-group = 'jeffdinoto'
-version = '0.0.1-snapshot'
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
@@ -38,32 +35,32 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-docker {
-	springBootApplication {
-		baseImage = 'openjdk:17-jdk-slim-buster'
-	}
-}
-
 task printGroup {
 	doLast {
-		println project.group
+		print project.group
 	}
 }
 
 task printName {
 	doLast {
-		println project.name
+		print project.name
 	}
 }
 
 task printVersion {
 	doLast {
-		println project.version
+		print project.version
 	}
 }
 
 task printCurrentImage {
 	doLast {
-		println project.group + '/' + project.name + ':' + project.version
+		print project.group + '/' + project.name + ':' + project.version
+	}
+}
+
+task printArch {
+	doLast {
+		print System.properties['os.arch']
 	}
 }

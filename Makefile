@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 
-CURRENT_IMAGE := $(shell ./gradlew -q printCurrentImage)
-CURRENT_GROUP := $(shell ./gradlew -q printGroup)
-CURRENT_APP := $(shell ./gradlew -q printName)
+GROUP := jeffdinoto
+APP := gh-metrics-collector
+VERSION := latest
 
 clean:
 	./gradlew clean
@@ -10,7 +10,8 @@ clean:
 build:
 	./gradlew build
 
-build-image: clean build
-	./gradlew dockerBuildImage
-	docker image tag $(CURRENT_IMAGE) $(CURRENT_GROUP)/$(CURRENT_APP):latest
-	docker image ls | grep "$(CURRENT_GROUP)/$(CURRENT_APP)"
+clean-image:
+	docker image rm --force $(GROUP)/$(APP):$(VERSION)
+
+build-image:
+	docker build . --tag $(GROUP)/$(APP):$(VERSION)
